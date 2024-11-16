@@ -3,6 +3,7 @@ using Dorixona.Domain.Abstractions;
 using Dorixona.Domain.Models.UserModel;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 
 namespace Dorixona.Infrastructure;
 
@@ -13,6 +14,7 @@ public sealed class ApplicationDbContext : DbContext, IUnitOfWork
     {
         _publisher = publisher;
     }
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

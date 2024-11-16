@@ -7,19 +7,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dorixona.Domain.Models.EmployeModel.Proporties;
+using Dorixona.Domain.Models.EmployeModel.DTO;
 
 namespace Dorixona.Domain.Models.EmployeModel
 {
     public sealed class Employe:Entity
     {
-        private Employe(Guid id, EmployeDTO employeDTO) : base(id)
+        private Employe(Guid Id, EmployeDTO employeDTO) : base(Id)
         {
+           
             FirstName = employeDTO.FirstName;
             LastName = employeDTO.LastName;
             PhoneNumber = employeDTO.PhoneNumber;
             Email = employeDTO.Email; 
             DateOfBirth = employeDTO.DateOfBirth;
             Salary = employeDTO.Salary;
+            PharmId = employeDTO.PharmId;
 
         }
         public Employe() { }
@@ -30,8 +33,9 @@ namespace Dorixona.Domain.Models.EmployeModel
         public Email Email { get; set; }
         public DateOfBirth DateOfBirth { get; set; }
         public Salary  Salary { get; set; }
+        public PharmId PharmId { get; set; }
 
-        public static Employe CreateOrder(Guid Id, EmployeDTO employeDTO)
+        public static Employe CreateEmployeModel(Guid Id, EmployeDTO employeDTO)
         {
             return new Employe(Id, employeDTO);
         }

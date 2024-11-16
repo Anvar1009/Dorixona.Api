@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Dorixona.Application.Abstractions.Data;
 using Dorixona.Domain.Abstractions;
+using Dorixona.Domain.Models.EmployeModel.Repository;
 using Dorixona.Domain.Models.OrderModel.OrderRepository;
 using Dorixona.Domain.Models.PillModel.PillRepository;
 using Dorixona.Domain.Models.UserModel.UserRepository;
@@ -30,6 +31,7 @@ namespace Dorixona.Infrastructure
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IPillRepository, PillRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<IEmployeRepository, EmployeRepository>();
 
 
             services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<ApplicationDbContext>());

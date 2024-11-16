@@ -40,39 +40,39 @@ namespace Dorixona.Api
 });
 
             // Swagger sozlamalari
-            builder.Services.AddSwaggerGen(m =>
-            {
-                m.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
-                m.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-                {
-                    In = ParameterLocation.Header,
-                    Description = "JWT tokenni kiriting (masalan: 'Bearer {token}')",
-                    Name = "Authorization",
-                    Type = SecuritySchemeType.ApiKey,
-                    Scheme = "Bearer"
-                });
-                m.AddSecurityRequirement(new OpenApiSecurityRequirement
-        {
-            {
-                new OpenApiSecurityScheme
-                {
-                    Reference = new OpenApiReference
-                    {
-                        Type = ReferenceType.SecurityScheme,
-                        Id = "Bearer"
-                    }
-                },
-                Array.Empty<string>()
-            }
-        });
-            });
+        //    builder.Services.AddSwaggerGen(m =>
+        //    {
+        //        m.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+        //        m.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+        //        {
+        //            In = ParameterLocation.Header,
+        //            Description = "JWT tokenni kiriting (masalan: 'Bearer {token}')",
+        //            Name = "Authorization",
+        //            Type = SecuritySchemeType.ApiKey,
+        //            Scheme = "Bearer"
+        //        });
+        //        m.AddSecurityRequirement(new OpenApiSecurityRequirement
+        //{
+        //    {
+        //        new OpenApiSecurityScheme
+        //        {
+        //            Reference = new OpenApiReference
+        //            {
+        //                Type = ReferenceType.SecurityScheme,
+        //                Id = "Bearer"
+        //            }
+        //        },
+        //        Array.Empty<string>()
+        //    }
+        //});
+        //    });
 
-            builder.Services.AddAuthorization(options =>
-            {
-                options.FallbackPolicy = new AuthorizationPolicyBuilder()
-                    .RequireAuthenticatedUser()
-                    .Build();
-            });
+        //    builder.Services.AddAuthorization(options =>
+        //    {
+        //        options.FallbackPolicy = new AuthorizationPolicyBuilder()
+        //            .RequireAuthenticatedUser()
+        //            .Build();
+        //    });
 
 
             builder.Services.AddApplicationRegisterServices();

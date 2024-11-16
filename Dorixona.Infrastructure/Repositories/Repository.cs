@@ -5,24 +5,28 @@ namespace Dorixona.Infrastructure.Repositories;
 
 public abstract class Repository<T> where T : Entity
 {
-    protected readonly ApplicationDbContext DbContext;
-
+    protected readonly ApplicationDbContext _context;
     protected Repository(ApplicationDbContext dbContext)
     {
-        DbContext = dbContext;
+        _context = dbContext;
     }
 
     public async Task<T?> GetByIdAsync(
         Guid id,
         CancellationToken cancellationToken = default)
     {
-        return await DbContext
+        return await _context
             .Set<T>()
             .FirstOrDefaultAsync(user => user.Id == id, cancellationToken);
     }
 
     public void Add(T entity)
     {
-        DbContext.Add(entity);
+        _context.Add(entity);
+    }
+
+    public void Update(T entity)
+    {
+        _context.Update(entity);
     }
 }
