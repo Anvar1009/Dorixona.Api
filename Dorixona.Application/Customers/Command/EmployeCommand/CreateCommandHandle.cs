@@ -20,7 +20,7 @@ namespace Dorixona.Application.Customers.Command.EmployeCommand
 
 
         public CreateCommandHandle(
-            IEmployeRepository  employeRepository,
+            IEmployeRepository employeRepository,
             IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
@@ -31,16 +31,16 @@ namespace Dorixona.Application.Customers.Command.EmployeCommand
             if (request == null)
                 return Result.Failure<Guid>(EmployeError.EmployeNull);
 
-            Guid employeId = Guid.NewGuid();   
-            
+            Guid employeId = Guid.NewGuid();
+
             var EmployemodelDTO = new EmployeDTO
             {
-                FirstName= new FirstName(request.CreateEmployeDTO.FirstName),
-                LastName = new LastName(request.CreateEmployeDTO.LastName), 
-                Salary= new Salary(request.CreateEmployeDTO.Salary),    
+                FirstName = new FirstName(request.CreateEmployeDTO.FirstName),
+                LastName = new LastName(request.CreateEmployeDTO.LastName),
+                Salary = new Salary(request.CreateEmployeDTO.Salary),
                 DateOfBirth = new DateOfBirth(request.CreateEmployeDTO.DateOfBirth),
                 Email = new Email(request.CreateEmployeDTO.Email),
-                PhoneNumber=new PhoneNumber(request.CreateEmployeDTO.PhoneNumber),
+                PhoneNumber = new PhoneNumber(request.CreateEmployeDTO.PhoneNumber),
                 PharmId = new PharmId(Guid.NewGuid()),
             };
 

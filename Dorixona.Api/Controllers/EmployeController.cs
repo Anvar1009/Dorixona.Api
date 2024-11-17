@@ -1,11 +1,11 @@
 ﻿using Dorixona.Application.Customers.Command.EmployeCommand;
-using Dorixona.Application.Homes.Query.EmployeQuery;
+using Dorixona.Application.Customers.Query.EmployeQuery;
 using Dorixona.Domain.Models.EmployeModel;
 using Dorixona.Domain.Models.EmployeModel.DTO;
 using Dorixona.Domain.Models.OrderModel;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+using Dorixona.Domain.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Dorixona.Api.Controllers
@@ -36,6 +36,7 @@ namespace Dorixona.Api.Controllers
             var result = await _sender.Send(query, cancellationToken);
 
             return Ok(result);
+            //return result.IsSuccess ? Ok(result) : BadRequest(EmployeError.NotFound);
         }
         [HttpPost]
         public async Task<IActionResult> CreateEmployeModel(
@@ -55,6 +56,18 @@ namespace Dorixona.Api.Controllers
         CancellationToken cancellationToken)
         {
             var command = new UpdateCommandEmploye(model);
+
+            var result = await _sender.Send(command, cancellationToken);
+
+            return result.IsSuccess ? Ok(result) : BadRequest(EmployeError.EmployeNull);
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteEmploye(
+        DeleteEmployeDTO model,
+        CancellationToken cancellationToken)
+        {
+            var command = new DeleteCommandEmploye(model);
 
             var result = await _sender.Send(command, cancellationToken);
 

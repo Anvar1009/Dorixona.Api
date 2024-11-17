@@ -2,18 +2,19 @@
 using Dorixona.Application.Abstractions.Data;
 using Dorixona.Application.Abstractions.Messages;
 using Dorixona.Domain.Abstractions;
+using Dorixona.Domain.Models.EmployeModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dorixona.Application.Homes.Query.EmployeQuery
+namespace Dorixona.Application.Customers.Query.EmployeQuery
 {
     internal sealed class GetEmployeQueryHandle : IQueryHandle<GetEmployeQuery, GetEmployeResponse>
     {
-       
-          private readonly ISqlConnection _connection;
+
+        private readonly ISqlConnection _connection;
 
         public GetEmployeQueryHandle(ISqlConnection connection)
         {

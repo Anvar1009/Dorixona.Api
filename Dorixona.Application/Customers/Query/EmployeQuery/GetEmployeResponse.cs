@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dorixona.Application.Homes.Query.EmployeQuery
+namespace Dorixona.Application.Customers.Query.EmployeQuery
 {
     internal class GetEmployeResponse
     {

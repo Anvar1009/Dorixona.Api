@@ -29,4 +29,8 @@ public abstract class Repository<T> where T : Entity
     {
         _context.Update(entity);
     }
+    public void Delete(T entity)
+    {
+        _context.Remove(entity);
+    }
 }

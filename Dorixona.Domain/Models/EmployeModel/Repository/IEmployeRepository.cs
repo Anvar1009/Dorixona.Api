@@ -12,5 +12,9 @@ namespace Dorixona.Domain.Models.EmployeModel.Repository
 
         void Update(Employe employe);
 
+        void Delete(Employe employe);   
+
+        Task<Employe> CheckId(Guid employe);
+
     }
 }

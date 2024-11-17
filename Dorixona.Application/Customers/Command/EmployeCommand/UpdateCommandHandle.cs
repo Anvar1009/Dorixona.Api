@@ -28,12 +28,12 @@ namespace Dorixona.Application.Customers.Command.EmployeCommand
         }
         public async Task<Result<Guid>> Handle(UpdateCommandEmploye request, CancellationToken cancellationToken)
         {
-               
+
             try
             {
                 if (request is not null)
                 {
-                    var empId= request.UpdateEmployeDTO.Id;
+                    var empId = request.UpdateEmployeDTO.Id;
 
                     var employeDTO = new EmployeDTO
                     {
@@ -46,17 +46,17 @@ namespace Dorixona.Application.Customers.Command.EmployeCommand
                         PharmId = new PharmId(Guid.NewGuid()),
                     };
 
-                    var model = Employe.CreateEmployeModel(empId, employeDTO);  
+                    var model = Employe.CreateEmployeModel(empId, employeDTO);
                     _employeRepository.Update(model);
                     await _unitOfWork.SaveChangesAsync();
-                     
+
                     return Result.Success(empId);
                 }
                 return Result.Failure<Guid>(EmployeError.EmployeNull);
             }
             catch
             {
-                return Result.Failure<Guid>( EmployeError.TryCatchError);
+                return Result.Failure<Guid>(EmployeError.TryCatchError);
             }
         }
     }

@@ -39,7 +39,7 @@ namespace Dorixona.Infrastructure
             services.AddSingleton<ISqlConnection>(_ =>
                 new SqlConnection(connectionString));
 
-            SqlMapper.AddTypeHandler(new DateOnlyTypeHandler());
+            SqlMapper.AddTypeHandler(new DateOnlyTypeHandler());    
 
             return services;
         }
