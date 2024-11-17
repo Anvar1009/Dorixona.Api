@@ -20,5 +20,9 @@ namespace Dorixona.Domain.Models.EmployeModel
             "EmployeName.NotExist",
             "Employename already exist"
             );
+        public static Error TryCatchError = new(
+           "an error was observed",
+           "An error occurred in the employee model, please check again."
+           );
     }
 }

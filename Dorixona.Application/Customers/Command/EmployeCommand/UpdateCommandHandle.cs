@@ -1,6 +1,8 @@
 ﻿using Dorixona.Application.Abstractions.Messages;
 using Dorixona.Domain.Abstractions;
 using Dorixona.Domain.Models.EmployeModel;
+using Dorixona.Domain.Models.EmployeModel.DTO;
+using Dorixona.Domain.Models.EmployeModel.Proporties;
 using Dorixona.Domain.Models.EmployeModel.Repository;
 using MediatR;
 using System;
@@ -31,34 +33,30 @@ namespace Dorixona.Application.Customers.Command.EmployeCommand
             {
                 if (request is not null)
                 {
-                    var userDetails = await ..Users.FirstOrDefaultAsync(x => x.UserID == request.UserID);
-                    if (userDetails != null)
-                    {
-                        userDetails.FirstName = request.FirstName;
-                        userDetails.LastName = request.LastName;
-                        userDetails.Email = request.Email;
-                        userDetails.Department = request.Department;
-                        userDetails.Password = request.Password;
+                    var empId= request.UpdateEmployeDTO.Id;
 
-                        await demoDBContext.SaveChangesAsync();
-                        response = new ResponseDto(userDetails.UserID, "Updated Successfully!");
-                        mediator.Publish(new ResponseEvent(response));
-                        return response;
-                    }
-                    else
+                    var employeDTO = new EmployeDTO
                     {
-                        response = new ResponseDto(request.UserID, "User ID not found in the Database!");
-                        mediator.Publish(new ErrorEvent(response));
-                        return response;
-                    }
+                        FirstName = new FirstName(request.UpdateEmployeDTO.FirstName),
+                        LastName = new LastName(request.UpdateEmployeDTO.LastName),
+                        Salary = new Salary(request.UpdateEmployeDTO.Salary),
+                        DateOfBirth = new DateOfBirth(request.UpdateEmployeDTO.DateOfBirth),
+                        Email = new Email(request.UpdateEmployeDTO.Email),
+                        PhoneNumber = new PhoneNumber(request.UpdateEmployeDTO.PhoneNumber),
+                        PharmId = new PharmId(Guid.NewGuid()),
+                    };
+
+                    var model = Employe.CreateEmployeModel(empId, employeDTO);  
+                    _employeRepository.Update(model);
+                    await _unitOfWork.SaveChangesAsync();
+                     
+                    return Result.Success(empId);
                 }
                 return Result.Failure<Guid>(EmployeError.EmployeNull);
             }
             catch
             {
-                response = new ResponseDto(default, "Failed!");
-                mediator.Publish(new ErrorEvent(response));
-                return response;
+                return Result.Failure<Guid>( EmployeError.TryCatchError);
             }
         }
     }

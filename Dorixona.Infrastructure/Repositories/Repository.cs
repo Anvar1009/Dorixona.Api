@@ -17,7 +17,7 @@ public abstract class Repository<T> where T : Entity
     {
         return await _context
             .Set<T>()
-            .FirstOrDefaultAsync(user => user.Id == id, cancellationToken);
+            .FirstOrDefaultAsync(Tmodel => Tmodel.Id == id, cancellationToken);
     }
 
     public void Add(T entity)

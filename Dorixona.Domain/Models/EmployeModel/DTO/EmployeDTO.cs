@@ -10,7 +10,7 @@ namespace Dorixona.Domain.Models.EmployeModel.DTO
 {
     public class EmployeDTO
     {
-        public Guid Id { get; set; }
+      //  public Guid Id { get; set; }
         public FirstName FirstName { get; set; }
         public LastName LastName { get; set; }
         public PhoneNumber PhoneNumber { get; set; }

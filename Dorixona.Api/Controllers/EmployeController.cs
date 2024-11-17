@@ -48,5 +48,17 @@ namespace Dorixona.Api.Controllers
 
             return result.IsSuccess ? Ok(result) : BadRequest(EmployeError.EmployeNull);
         }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateEmployeModel(
+        UpdateEmployeDTO model,
+        CancellationToken cancellationToken)
+        {
+            var command = new UpdateCommandEmploye(model);
+
+            var result = await _sender.Send(command, cancellationToken);
+
+            return result.IsSuccess ? Ok(result) : BadRequest(EmployeError.EmployeNull);
+        }
     }
 }
